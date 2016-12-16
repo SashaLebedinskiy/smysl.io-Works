@@ -24,3 +24,14 @@ from
 where users.country='Russia'or users.country='Brazil'
 group by users.country,
 order by order_sum.total_sum desc
+
+/*3*/
+select
+  count(users.first_name) as counts_of_no_pay_users, 
+  orders.orders_id,
+from 
+  [crested-booking-152317:sqlsmysloi.e1_users] as users
+  LEFT JOIN [crested-booking-152317:sqlsmysloi.e1_orders] as orders
+  on users.id=orders.user_id
+where orders.user_id is NULL
+group by orders.orders_id
