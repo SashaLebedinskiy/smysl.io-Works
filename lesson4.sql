@@ -1,3 +1,4 @@
+/*1*/
 select
   users.first_name, 
   users.last_name, 
@@ -10,4 +11,16 @@ from
 group by users.first_name, 
   users.last_name, 
   users.email,
+order by order_sum.total_sum desc
+
+/*2*/
+select
+  users.country, 
+  sum(order_sum.order_sum) as order_sum.total_sum,
+from 
+  [crested-booking-152317:sqlsmysloi.e1_users] as users
+  join [crested-booking-152317:sqlsmysloi.e1_orders] as order_sum
+  on users.id=order_sum.user_id
+where users.country='Russia'or users.country='Brazil'
+group by users.country,
 order by order_sum.total_sum desc
