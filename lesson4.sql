@@ -35,3 +35,14 @@ from
   on users.id=orders.user_id
 where orders.user_id is NULL
 group by orders.orders_id
+
+/*4*/
+select
+  users.first_name,
+  count(orders.orders_id) as counts_of_no_user_orders,
+from 
+  [crested-booking-152317:sqlsmysloi.e1_orders] as orders
+  LEFT JOIN [crested-booking-152317:sqlsmysloi.e1_users] as users
+  on users.id=orders.user_id
+where users.first_name is NULL
+group by users.first_name
